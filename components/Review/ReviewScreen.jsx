@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
-import AddCategory from "./AddCategory"; // Zakładamy, że AddCategory jest twoim komponentem modalnym
+import AddCategory from "./AddCategory";
 
 function ReviewScreen({ route }) {
   const { place } = route.params;
@@ -63,9 +63,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   pickerContainer: {
-    position: "absolute",
-    right: 10,
-    top: 10,
     alignItems: "center",
   },
   dropdownButtonStyle: {
