@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import AddCategory from "./AddCategory";
+import Rating from "./Rating";
+import AddFriend from "./AddFriend";
 
 function ReviewScreen({ route }) {
   const { place } = route.params;
@@ -11,7 +13,9 @@ function ReviewScreen({ route }) {
     { label: "Jedzenie", value: "jedzenie" },
     { label: "Zwiedzanie", value: "zwiedzanie" },
   ]);
+  const [friends, setFriends] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalFriendsVisible, setModalFriendsVisible] = useState(false);
 
   const addCategory = (category) => {
     const newCategoryTrimmed = category.trim();
@@ -22,9 +26,18 @@ function ReviewScreen({ route }) {
       ]);
     }
   };
+  const addFriends = (friend) => {
+    console.log(friend);
+  };
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.addButton}
+        onPress={() => setModalFriendsVisible(true)}
+      >
+        <Text style={styles.addButtonText}>+</Text>
+      </TouchableOpacity>
       <Text>{place.name}</Text>
       <View style={styles.pickerContainer}>
         <DropDownPicker
@@ -52,6 +65,14 @@ function ReviewScreen({ route }) {
         onAdd={addCategory}
         onClose={() => setModalVisible(false)}
       />
+      <AddFriend
+        isVisible={modalFriendsVisible}
+        onAdd={addFriends}
+        onClose={() => setModalFriendsVisible(false)}
+      />
+      <Text>Ocena</Text>
+
+      <Rating totalStars={10} />
     </View>
   );
 }
